@@ -93,7 +93,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<CloudMessage> {
                     .userid(idUser)
                     .build());
             entityManager.getTransaction().commit();
-            ctx.writeAndFlush(new NotesResponse(notes));
             notesResponse(ctx);
         }catch (IllegalStateException ise) {
             entityManager.getTransaction().commit();
@@ -101,6 +100,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<CloudMessage> {
     }
 
     private void notesResponse(ChannelHandlerContext ctx) {
+        notes.clear();
         for (Notes note :
                 entityManager.createNamedQuery("Notes.findNotesByUserId", Notes.class).setParameter("userId", idUser).getResultList()) {
             if (note != null) {
