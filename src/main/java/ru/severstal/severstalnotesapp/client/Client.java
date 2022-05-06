@@ -68,10 +68,6 @@ public class Client implements Initializable {
                 listView.getItems().add(note);
             }
         });
-////        listView.getItems().clear();
-//        for (String note : message.getNotes()) {
-//            listView.getItems().add(note);
-//        }
     }
 
     private void postNotes(String note) throws IOException {
@@ -98,21 +94,16 @@ public class Client implements Initializable {
         dialog.setHeaderText("Creating a new note.");
         dialog.setContentText("Please enter new text note:");
 
-//        Platform.runLater(() -> {
-
-            Optional<String> result = dialog.showAndWait();
-            if (result.isPresent()) {
-                String note = result.get() + " " + new Date();
-                listView.getItems().add(note);
-
-                try {
-                    postNotes(note);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String note = result.get() + " " + new Date();
+            try {
+                postNotes(note);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-//        });
+
+        }
     }
 
     public void deleteBut(ActionEvent actionEvent) throws IOException {
