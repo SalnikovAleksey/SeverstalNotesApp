@@ -94,16 +94,16 @@ public class Client implements Initializable {
         dialog.setHeaderText("Creating a new note.");
         dialog.setContentText("Please enter new text note:");
 
-            Optional<String> result = dialog.showAndWait();
-            if (result.isPresent()) {
-                String note = result.get() + " " + new Date();
-                try {
-                    postNotes(note);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String note = result.get() + " " + new Date();
+            try {
+                postNotes(note);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+
+        }
     }
 
     public void deleteBut(ActionEvent actionEvent) throws IOException {
